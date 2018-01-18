@@ -532,7 +532,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 159.9517242, 163.048276, 9126.888, 900 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 159.9517242, 163.048276, 9126.888, 1083 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1043,7 +1043,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (2*60)
+#define HOMING_FEEDRATE_Z  (3*60)
 
 // @section calibrate
 
