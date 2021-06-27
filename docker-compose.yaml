@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # https://github.com/OctoPrint/octoprint-docker
+  octoprint:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 80:80
+    devices:
+     - /dev/ttyACM0:/dev/ttyACM0
+     #- /dev/video0:/dev/video0
+    volumes:
+     - octoprint:/octoprint
+     # SKR SD card is mounted as a USB drive for firmware updates.
+     #- /media/usb:/media/usb:rw:shared
+     - /media/usb:/media/usb:rw
+     - /usr/bin/umount:/usr/bin/umount
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    #environment:
+    #  - ENABLE_MJPG_STREAMER=true
+    environment:
+     - TZ=America/Los_Angeles
+    # Allows Octoprint Firmware Updater to run umount to reset the SD Card.
+    privileged: true
+  
+  ####
+  # uncomment if you wish to edit the configuration files of octoprint using a served VSCode
+  # refer to docs on configuration editing for more information
+  # https://github.com/OctoPrint/octoprint-docker#editing-config-files-manually
+  ####
+
+  #config-editor:
+  #  image: linuxserver/code-server
+  #  ports:
+  #    - 8443:8443
+  #  depends_on:
+  #    - octoprint
+  #  restart: unless-stopped
+  #  environment:
+  #    - PUID=0
+  #    - GUID=0
+  #    - TZ=America/Chicago
+  #  volumes:
+  #    - octoprint:/config
+
+volumes:
+  octoprint:
